@@ -124,7 +124,7 @@ export default function Hero() {
                     scale: isMissionView ? 0.95 : 1
                 }}
                 transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute -bottom-[15vh] md:-bottom-[20vh] right-[5%] md:right-[10%] z-30 pointer-events-none h-[85vh] md:h-[105vh] w-auto flex items-end"
+                className="absolute -bottom-[10vh] md:-bottom-[20vh] right-0 md:right-[10%] z-30 pointer-events-none h-[65vh] md:h-[105vh] w-auto flex items-end"
             >
                 <div className="relative h-full w-auto aspect-[800/1050]">
                     <Image
