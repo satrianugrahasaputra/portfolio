@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+  cursor: default;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Typography */
+.font-display {
+  font-family: var(--font-outfit), sans-serif;
+}
+
+/* Selection highlight */
+::selection {
+  background-color: #00fff2;
+  color: #000000;
+}
+
+/* Motion Blur Utilities */
+@layer utilities {
+  .blur-transition {
+    filter: blur(20px);
+    transform: scale(1.1);
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .blur-visible {
+    filter: blur(0px);
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .text-stroke {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    color: transparent;
+  }
+
+  .text-stroke-accent {
+    -webkit-text-stroke: 1px #00fff2;
+    color: transparent;
+  }
+}
+
+/* Slide Transitions */
+.slide-enter {
+  filter: blur(40px);
+  transform: scale(1.2);
+  opacity: 0;
+}
+
+.slide-active {
+  filter: blur(0px);
+  transform: scale(1);
+  opacity: 1;
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-exit {
+  filter: blur(40px);
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
