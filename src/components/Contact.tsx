@@ -15,12 +15,33 @@ export default function Contact() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-        // Simulate network request
-        await new Promise(r => setTimeout(r, 1500));
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-        setFormData({ name: "", email: "", message: "" });
-        setTimeout(() => setIsSubmitted(false), 4000);
+        try {
+            const response = await fetch("https://formsubmit.co/ajax/satrians49@gmail.com", {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    message: formData.message
+                })
+            });
+            
+            if (response.ok) {
+                setIsSubmitted(true);
+                setFormData({ name: "", email: "", message: "" });
+            } else {
+                alert("Something went wrong. Please try again.");
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Error sending message. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+            setTimeout(() => setIsSubmitted(false), 4000);
+        }
     };
 
     return (
