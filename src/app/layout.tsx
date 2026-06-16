@@ -21,8 +21,10 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "Satria Nugraha | Motion Portfolio",
-    description: "Creative Data Scientist & Developer Portfolio",
+    title: "Satria Nugraha Saputra | Data Scientist & Developer Portfolio",
+    description: "Portfolio of Satria Nugraha Saputra, specializing in building scalable systems, data-driven applications, and machine learning solutions.",
+    keywords: ["Satria Nugraha Saputra", "Satria Nugraha", "Portfolio", "Data Scientist", "Developer", "Web Developer", "Machine Learning", "Software Engineer"],
+    authors: [{ name: "Satria Nugraha Saputra" }],
 };
 
 export default function RootLayout({
