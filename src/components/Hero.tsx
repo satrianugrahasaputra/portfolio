@@ -62,13 +62,7 @@ export default function Hero() {
 
     return (
         <section id="home" className="relative h-screen w-full overflow-hidden bg-[#111] font-sans">
-            {/* Vertical Grid Lines */}
-            <div className={`absolute inset-0 z-10 pointer-events-none flex justify-between px-[5%] md:px-[10%] transition-opacity duration-1000 ${isMissionView ? 'opacity-0' : 'opacity-100'}`}>
-                <div className="w-[1px] h-full bg-white/10" />
-                <div className="w-[1px] h-full bg-white/10 hidden md:block" />
-                <div className="w-[1px] h-full bg-white/10 hidden md:block" />
-                <div className="w-[1px] h-full bg-white/10" />
-            </div>
+
 
             {/* Background Layer (z-0 to z-10) */}
             <AnimatePresence initial={false} mode="wait">
