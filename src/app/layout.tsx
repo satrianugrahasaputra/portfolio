@@ -25,6 +25,9 @@ export const metadata: Metadata = {
     description: "Portfolio of Satria Nugraha Saputra, specializing in building scalable systems, data-driven applications, and machine learning solutions.",
     keywords: ["Satria Nugraha Saputra", "Satria Nugraha", "Portfolio", "Data Scientist", "Developer", "Web Developer", "Machine Learning", "Software Engineer"],
     authors: [{ name: "Satria Nugraha Saputra" }],
+    icons: {
+        icon: "/logo_sns.png",
+    },
 };
 
 export default function RootLayout({
