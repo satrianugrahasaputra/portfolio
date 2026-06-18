@@ -28,6 +28,13 @@ export const metadata: Metadata = {
     icons: {
         icon: "/logo_sns.png",
     },
+    openGraph: {
+        siteName: "Satria Nugraha Saputra",
+        title: "Satria Nugraha Saputra | Data Scientist & Developer Portfolio",
+        description: "Portfolio of Satria Nugraha Saputra",
+        url: "https://satrianugrahasaputra.com",
+        type: "website",
+    }
 };
 
 export default function RootLayout({
@@ -37,6 +44,20 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className={`${inter.variable} ${outfit.variable} ${mono.variable}`}>
+            <head>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "WebSite",
+                            "name": "Satria Nugraha Saputra",
+                            "alternateName": ["Satria Nugraha", "satrianugrahasaputra"],
+                            "url": "https://satrianugrahasaputra.com"
+                        })
+                    }}
+                />
+            </head>
             <body className="antialiased bg-background text-foreground">
                 <div className="relative z-0">
                     {children}
