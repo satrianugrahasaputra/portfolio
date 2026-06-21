@@ -71,7 +71,7 @@ const projects = [
         tags: ["PHP", "CodeIgniter 4", "MySQL", "Bootstrap", "MVC Architecture"],
         year: "2026",
         status: "DEPLOYED",
-        link: "https://github.com/satrianugrahasaputra/dda-online-ci4"
+        link: "https://github.com/satrianugrahasaputra/DDA_Online"
     },
     {
         id: "PRJ-05",
