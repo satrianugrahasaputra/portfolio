@@ -3,6 +3,7 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { useRef, useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { HiExternalLink, HiCheckCircle, HiX, HiArrowRight } from "react-icons/hi";
 
 const projects = [
@@ -71,6 +72,23 @@ const projects = [
         year: "2026",
         status: "DEPLOYED",
         link: "https://github.com/satrianugrahasaputra/dda-online-ci4"
+    },
+    {
+        id: "PRJ-05",
+        title: "Ayam Nusantara Victoria (Web App)",
+        category: "Web Application",
+        description: "A modern culinary web portal featuring menu highlights, customer testimonials, photo galleries, and an automated WhatsApp-integrated order management system.",
+        longDescription: "Ayam Nusantara Victoria is a high-performance web platform designed to digitize and optimize ordering workflows for a local Indonesian cuisine restaurant. Built on top of Laravel, TailwindCSS, and Alpine.js, it includes full responsive navigation, interactive food gallery displays, local business SEO schema injection, and custom WhatsApp message templating for direct order placements.",
+        impacts: [
+            "Successfully built and deployed live landing page and digital menu system",
+            "Implemented automated checkout template messages directed to WhatsApp",
+            "Optimized local search engine optimization (SEO) using structured JSON-LD schemas",
+            "Designed a responsive UI to support online menus, dining reviews, and location routing"
+        ],
+        tags: ["Laravel", "TailwindCSS", "Alpine.js", "PHP", "SEO Schema", "MySQL"],
+        year: "2026",
+        status: "ACTIVE",
+        link: "https://umkm-ayam-nusantara.vercel.app/"
     }
 ];
 
@@ -80,6 +98,11 @@ export default function Projects() {
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [activeProject, setActiveProject] = useState<typeof projects[0] | null>(null);
     const [isExpanded, setIsExpanded] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     // Get unique categories dynamically
     const categories = ["All", ...Array.from(new Set(projects.map((p) => p.category)))];
@@ -180,111 +203,114 @@ export default function Projects() {
             </div>
 
             {/* Premium Project Details Modal */}
-            <AnimatePresence>
-                {activeProject && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        onClick={() => setActiveProject(null)}
-                        className="fixed inset-0 z-[120] bg-black/60 backdrop-blur-md flex items-center justify-center p-4 md:p-8"
-                    >
+            {mounted && typeof window !== "undefined" && createPortal(
+                <AnimatePresence>
+                    {activeProject && (
                         <motion.div
-                            initial={{ scale: 0.95, y: 30, opacity: 0 }}
-                            animate={{ scale: 1, y: 0, opacity: 1 }}
-                            exit={{ scale: 0.95, y: 30, opacity: 0 }}
-                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            onClick={(e) => e.stopPropagation()}
-                            className="bg-white text-black max-w-4xl w-full max-h-[85vh] overflow-y-auto rounded-3xl shadow-2xl relative border border-black/5"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setActiveProject(null)}
+                            className="fixed inset-0 z-[120] bg-black/60 backdrop-blur-md flex items-center justify-center p-4 md:p-8"
                         >
-                            {/* Close button */}
-                            <button
-                                onClick={() => setActiveProject(null)}
-                                className="absolute top-6 right-6 p-2 rounded-full bg-black/5 hover:bg-black/10 text-zinc-700 hover:text-black transition-colors z-10"
+                            <motion.div
+                                initial={{ scale: 0.95, y: 30, opacity: 0 }}
+                                animate={{ scale: 1, y: 0, opacity: 1 }}
+                                exit={{ scale: 0.95, y: 30, opacity: 0 }}
+                                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                                onClick={(e) => e.stopPropagation()}
+                                className="bg-white text-black max-w-4xl w-full max-h-[85vh] overflow-y-auto rounded-3xl shadow-2xl relative border border-black/5"
                             >
-                                <HiX size={20} />
-                            </button>
+                                {/* Close button */}
+                                <button
+                                    onClick={() => setActiveProject(null)}
+                                    className="absolute top-6 right-6 p-2 rounded-full bg-black/5 hover:bg-black/10 text-zinc-700 hover:text-black transition-colors z-10"
+                                >
+                                    <HiX size={20} />
+                                </button>
 
-                            {/* Modal Content */}
-                            <div className="p-8 md:p-12">
-                                <div className="flex items-center gap-4 mb-4">
-                                    <span className="font-sans text-xs text-accent tracking-[0.2em] font-bold px-3 py-1 bg-accent/10 rounded-full">
-                                        {activeProject.id}
-                                    </span>
-                                    <span className="font-sans text-xs text-zinc-500 uppercase tracking-wider">
-                                        {activeProject.category}
-                                    </span>
-                                </div>
+                                {/* Modal Content */}
+                                <div className="p-8 md:p-12">
+                                    <div className="flex items-center gap-4 mb-4">
+                                        <span className="font-sans text-xs text-accent tracking-[0.2em] font-bold px-3 py-1 bg-accent/10 rounded-full">
+                                            {activeProject.id}
+                                        </span>
+                                        <span className="font-sans text-xs text-zinc-500 uppercase tracking-wider">
+                                            {activeProject.category}
+                                        </span>
+                                    </div>
 
-                                <h3 className="font-display text-3xl md:text-5xl font-black text-black tracking-tight mb-6">
-                                    {activeProject.title}
-                                </h3>
+                                    <h3 className="font-display text-3xl md:text-5xl font-black text-black tracking-tight mb-6">
+                                        {activeProject.title}
+                                    </h3>
 
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mt-8 border-t border-black/5 pt-8">
-                                    {/* Left: Long Description */}
-                                    <div className="md:col-span-2 space-y-6">
-                                        <div>
-                                            <h4 className="font-sans font-bold text-zinc-400 text-xs tracking-wider uppercase mb-2">Project Brief</h4>
-                                            <p className="text-zinc-700 font-sans text-base leading-relaxed">
-                                                {activeProject.longDescription}
-                                            </p>
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mt-8 border-t border-black/5 pt-8">
+                                        {/* Left: Long Description */}
+                                        <div className="md:col-span-2 space-y-6">
+                                            <div>
+                                                <h4 className="font-sans font-bold text-zinc-400 text-xs tracking-wider uppercase mb-2">Project Brief</h4>
+                                                <p className="text-zinc-700 font-sans text-base leading-relaxed">
+                                                    {activeProject.longDescription}
+                                                </p>
+                                            </div>
+
+                                            <div>
+                                                <h4 className="font-sans font-bold text-zinc-400 text-xs tracking-wider uppercase mb-3">Technologies Deployed</h4>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {activeProject.tags.map((tag) => (
+                                                        <span key={tag} className="px-4 py-1.5 bg-black/5 rounded-full text-black/70 font-sans text-xs font-semibold">
+                                                            {tag}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        <div>
-                                            <h4 className="font-sans font-bold text-zinc-400 text-xs tracking-wider uppercase mb-3">Technologies Deployed</h4>
-                                            <div className="flex flex-wrap gap-2">
-                                                {activeProject.tags.map((tag) => (
-                                                    <span key={tag} className="px-4 py-1.5 bg-black/5 rounded-full text-black/70 font-sans text-xs font-semibold">
-                                                        {tag}
+                                        {/* Right: Key Achievements */}
+                                        <div className="space-y-6">
+                                            <div>
+                                                <h4 className="font-sans font-bold text-zinc-400 text-xs tracking-wider uppercase mb-4">Key Achievements</h4>
+                                                <ul className="space-y-3">
+                                                    {activeProject.impacts.map((impact, idx) => (
+                                                        <li key={idx} className="flex items-start gap-3">
+                                                            <HiCheckCircle className="text-accent mt-0.5 shrink-0 text-lg" />
+                                                            <span className="font-sans text-sm text-zinc-700 leading-relaxed">{impact}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+
+                                            <div className="pt-6 border-t border-black/5 flex flex-col gap-4">
+                                                <div className="flex justify-between">
+                                                    <span className="font-sans text-xs text-zinc-400 font-bold uppercase">Year</span>
+                                                    <span className="font-sans text-sm font-bold text-black">{activeProject.year}</span>
+                                                </div>
+                                                <div className="flex justify-between">
+                                                    <span className="font-sans text-xs text-zinc-400 font-bold uppercase">Status</span>
+                                                    <span className="font-sans text-xs font-bold px-2.5 py-0.5 rounded bg-green-100 text-green-800 uppercase tracking-wide">
+                                                        {activeProject.status}
                                                     </span>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </div>
+                                                </div>
 
-                                    {/* Right: Key Achievements */}
-                                    <div className="space-y-6">
-                                        <div>
-                                            <h4 className="font-sans font-bold text-zinc-400 text-xs tracking-wider uppercase mb-4">Key Achievements</h4>
-                                            <ul className="space-y-3">
-                                                {activeProject.impacts.map((impact, idx) => (
-                                                    <li key={idx} className="flex items-start gap-3">
-                                                        <HiCheckCircle className="text-accent mt-0.5 shrink-0 text-lg" />
-                                                        <span className="font-sans text-sm text-zinc-700 leading-relaxed">{impact}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-
-                                        <div className="pt-6 border-t border-black/5 flex flex-col gap-4">
-                                            <div className="flex justify-between">
-                                                <span className="font-sans text-xs text-zinc-400 font-bold uppercase">Year</span>
-                                                <span className="font-sans text-sm font-bold text-black">{activeProject.year}</span>
+                                                <a
+                                                    href={activeProject.link || "#"}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="mt-4 flex items-center justify-center gap-2 font-sans text-sm font-bold bg-accent text-white hover:bg-accent/90 transition-colors py-3 px-6 rounded-full shadow-md"
+                                                >
+                                                    <span>Visit Live Link</span>
+                                                    <HiExternalLink size={18} />
+                                                </a>
                                             </div>
-                                            <div className="flex justify-between">
-                                                <span className="font-sans text-xs text-zinc-400 font-bold uppercase">Status</span>
-                                                <span className="font-sans text-xs font-bold px-2.5 py-0.5 rounded bg-green-100 text-green-800 uppercase tracking-wide">
-                                                    {activeProject.status}
-                                                </span>
-                                            </div>
-
-                                            <a
-                                                href={activeProject.link || "#"}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="mt-4 flex items-center justify-center gap-2 font-sans text-sm font-bold bg-accent text-white hover:bg-accent/90 transition-colors py-3 px-6 rounded-full shadow-md"
-                                            >
-                                                <span>Visit Live Link</span>
-                                                <HiExternalLink size={18} />
-                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                    )}
+                </AnimatePresence>,
+                document.body
+            )}
         </section>
     );
 }
