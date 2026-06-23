@@ -54,7 +54,7 @@ const projects = [
         tags: ["Scikit-learn", "Pandas", "XGBoost", "Python", "SMOTE"],
         year: "2025",
         status: "RESEARCH",
-        link: "https://github.com/satrianugrahasaputra/Project_Machine_Learning_Prediction_Healtchare_Stroke"
+        link: "https://project-machine-learning-prediction.vercel.app/"
     },
     {
         id: "PRJ-04",
