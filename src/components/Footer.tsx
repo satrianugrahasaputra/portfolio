@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import Link from "next/link";
 
 export default function Footer() {
     return (
@@ -43,8 +44,12 @@ export default function Footer() {
                         Handcrafted with passion & Precision
                     </p>
                     <div className="flex gap-8">
-                        <a href="#" className="text-zinc-400 hover:text-zinc-900 transition-colors text-[10px] font-bold uppercase tracking-[0.2em]">Privacy Policy</a>
-                        <a href="#" className="text-zinc-400 hover:text-zinc-900 transition-colors text-[10px] font-bold uppercase tracking-[0.2em]">Terms of Service</a>
+                        <Link href="/privacy" className="text-zinc-400 hover:text-zinc-900 transition-colors text-[10px] font-bold uppercase tracking-[0.2em]">
+                            Privacy Policy
+                        </Link>
+                        <Link href="/terms" className="text-zinc-400 hover:text-zinc-900 transition-colors text-[10px] font-bold uppercase tracking-[0.2em]">
+                            Terms of Service
+                        </Link>
                     </div>
                 </div>
             </div>
