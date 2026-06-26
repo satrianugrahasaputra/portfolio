@@ -38,7 +38,7 @@ const projects = [
         tags: ["Python", "TensorFlow", "FastAPI", "RNN", "CNN", "NLP"],
         year: "2025",
         status: "ACTIVE",
-        link: "https://github.com/satrianugrahasaputra/Comparison-Model-RNN-and-CNN-in-Sentiment-Classification-of-User-Reviews-on-the-Play-Store/tree/main"
+        link: "https://comparison-model-rnn-and-cnn.vercel.app/"
     },
     {
         id: "PRJ-03",
